@@ -12,4 +12,19 @@ Check out the [Insomnia](https://insomnia.rest/) or [Postman](https://www.postma
 
 I personally make use of Insomnia.
 
-## More documentation once I (hopefully) finish this thing.
+# How can I contribute to development?
+
+## To get your local development environment set-up:
+
+1. Clone the repository: `git clone https://github.com/SavvyDev06/dankpods-api.git`
+2. Install the npm packages: `npm i`
+3. Create a `.env` file to store your MongoDB Atlas Database secrets: `MONGODB-DB-UNAME` and `MONGODB-DB-PASS` (make sure you create a MongoDB Atlas cluster first).
+4. Run `npm run dev` to launch the development server.
+
+## To contribute:
+
+1. Create a pull request ([read more here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/working-with-your-remote-repository-on-github-or-github-enterprise/creating-an-issue-or-pull-request))
+
+### More documentation to come once I (hopefully) finish this thing.
+
+_dingus_
