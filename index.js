@@ -32,7 +32,7 @@ app.get("/dank", (req, res) => {
 
 async function getQuote(res) {
   const result = await collection
-    .aggregate([{ $match: { verified: true } }])
+    .aggregate([{ $match: { verified: true } }, { $sample: { size: 1 } }])
     .toArray();
 
   console.log(result[0].quote);
