@@ -9,27 +9,39 @@ const dotenv = require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.MONGOCLIENT_URI;
 
-const client = new MongoClient(uri, {
+const mongoClient = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
 
-client.connect((err) => {
-  const collection = client.db("dankpods-api").collection("quotes");
-  // perform actions on the collection object
-  client.close();
-});
+mongoClient.connect();
+console.log("Connected successfully to MongoDB server");
+const db = mongoClient.db("dankpods-api");
+const collection = db.collection("quotes");
+
+//...end of MongoDB
 
 app.use(express.json());
 
 app.get("/dank", (req, res) => {
-  console.log("pods");
-  res.status(200).send({
-    quote: "dingus",
-    author: "dankmus",
-  });
+  console.log("Sending quote!");
+
+  getQuote(res);
 });
+
+async function getQuote(res) {
+  const result = await collection
+    .aggregate([{ $match: { verified: true } }])
+    .toArray();
+
+  console.log(result[0].quote);
+
+  res.status(200).send({
+    quote: result[0].quote,
+    author: result[0].author,
+  });
+}
 
 app.post("/quote/:id", (req, res) => {
   const { id } = req.params;
