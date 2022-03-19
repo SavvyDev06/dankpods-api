@@ -31,11 +31,14 @@ app.get("/dank", (req, res) => {
 });
 
 async function getQuote(res) {
+  //Get a random record, courtesy of: https://stackoverflow.com/questions/2824157/random-record-from-mongodb
   const result = await collection
     .aggregate([{ $match: { verified: true } }, { $sample: { size: 1 } }])
-    .toArray();
+    .toArray(); //Convert the result into array form. Courtesy of: https://stackoverflow.com/a/60029466
 
-  console.log(result[0].quote);
+  console.log(
+    `Just responded to a GET request with quote ${result[0].quote} and author ${result[0].author}`
+  );
 
   res.status(200).send({
     quote: result[0].quote,
@@ -43,6 +46,8 @@ async function getQuote(res) {
   });
 }
 
+//Todo: Store data into DB when receiving a post request with verified bool set to FALSE by default.
+// Also, double-check db schema to ensure this is scalable when allowing any random joe to POST a quote to our DB.
 app.post("/quote/:id", (req, res) => {
   const { id } = req.params;
   const { quote, author } = req.body;
