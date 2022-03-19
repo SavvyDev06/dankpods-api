@@ -5,6 +5,22 @@ const PORT = 8080;
 //Dotenv for credential management
 const dotenv = require("dotenv").config();
 
+//MongoDB
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri = process.env.MONGOCLIENT_URI;
+
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
+
+client.connect((err) => {
+  const collection = client.db("dankpods-api").collection("quotes");
+  // perform actions on the collection object
+  client.close();
+});
+
 app.use(express.json());
 
 app.get("/dank", (req, res) => {
