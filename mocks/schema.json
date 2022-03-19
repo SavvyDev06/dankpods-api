@@ -1,0 +1,8 @@
+{
+  "_id": {
+    "$oid": "XXXXXXXXXXXXXXXXX"
+  },
+  "quote": "AuoteHere",
+  "author": "AuthorHere",
+  "verified": false
+}
