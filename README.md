@@ -1,3 +1,5 @@
+![The DankPods API Logo](https://cdn.discordapp.com/attachments/821847610473709599/958794930174689350/unknown.png)
+
 # Welcome to the DankPods API! 📱
 
 Hello! This is a fun, experimental REST API which will return some fancy dankpods quotes.
